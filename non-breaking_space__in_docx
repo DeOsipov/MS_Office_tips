@@ -1,0 +1,65 @@
+Sub Macros1()
+
+' In "s" write all conjunction and pretext
+    Dim s As String
+    s = "с,и,не,но,а,без,в,до,за,из,из-за,из-под,к,на,о,от,по,под,при,у,СП"
+    Dim sArray() As String
+    sArray = Split(s, ",")
+    
+    Dim Symb160 As String
+' Chr(160) is a non-breaking space
+    Sym160 = Chr(160)
+    
+    Dim i As Integer
+    
+    For i = LBound(sArray) To UBound(sArray)
+        Selection.Find.ClearFormatting
+        Selection.Find.Replacement.ClearFormatting
+        With Selection.Find
+            .Text = " " & sArray(i) & " "
+            .Replacement.Text = " " & sArray(i) & Sym160
+            .Forward = True
+            .Wrap = wdFindAsk
+            .Format = False
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+        Selection.Find.Execute Replace:=wdReplaceAll
+    Next i
+    
+End Sub
+
+Sub Macros2()
+
+' In "s" write all conjunction and pretext
+    Dim s As String
+    s = " г.,кВт, ккал,м.,м ,т.,т "
+    Dim sArray() As String
+    sArray = Split(s, ",")
+    
+' Chr(160) is a non-breaking space
+    
+    Dim i As Integer
+    
+    For i = LBound(sArray) To UBound(sArray)
+        Selection.Find.ClearFormatting
+        Selection.Find.Replacement.ClearFormatting
+        With Selection.Find
+            .Text = " " & sArray(i)
+            .Replacement.Text = Chr(160) & sArray(i)
+            .Forward = True
+            .Wrap = wdFindAsk
+            .Format = False
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+        Selection.Find.Execute Replace:=wdReplaceAll
+    Next i
+    
+End Sub
